@@ -1,0 +1,74 @@
+#
+#Script: Gráficos básicos de R base
+#Autor: María José C. Mondragón
+#Indicaciones para el taller del día 12 de diciembre del 2024
+
+#### INTRODUCCIÓN ####
+
+#Recuerda establecer tu directorio con:
+getwd() 
+setwd() #En caso de no estar dónde quieres
+
+#R base cuenta con diversas bases de datos que están disponibles para explorar
+data()
+
+#Trabajaremos con "airquality" una base de datos que forma parte de R base
+
+airquality #Explora "airquality"
+airquality$Temp #Explora las variables de "airquality" y visualiza "Temp"
+attach (airquality) #Recordamos Attach()? Vincula el dataframe 
+Temp 
+
+?order #Ordena los elementos de un vector
+order(Temp) 
+order(Temp,decreasing = TRUE )
+
+#¿Qué tan observador eres? ¿Notaste algo raro?
+
+Orden.indices <- order(Temp)
+Temp.ordenada <- Temp[Orden.indices] #Creemos un objeto con los datos ordenados
+Temp.ordenada
+
+airquality[Temp.ordenada,] #Organiza la base de datos en función de "Temp"
+head(airquality[Temp.ordenada,]) #Visualiza las primeras filas
+tail(airquality[Temp.ordenada,]) #Visualiza las últimas filas
+
+#### GRÁFICOS DE BARRAS ####
+?barplot 
+barplot(Temp.ordenada, col = "pink")
+barplot(table(iris$Species), main =  "Iris:Especies", xlab = "Especie", 
+        ylab = "Frecuencia", col = "mistyrose")
+
+#6.7
+?barplot
+barplot(table(iris$Species), main =  "Iris:Especies", xlab = "Frecuencia", 
+        ylab = "Especie", col = "lavender", horiz = TRUE)
+
+#Representación de la relación entre dos variables continuas: 
+#gráficos de dispersión
+#6.8
+plot(iris$Sepal.Width, iris$Sepal.Length) #al parecer no hay una clqra correlación entre 
+#la anchura y la longitud del sépalo. 
+
+#6.9
+plot(iris$Sepal.Width, iris$Sepal.Length, main = "Iris: Relación largo/ancho del sépalo",
+     xlab = "Largo del sépalo", ylab = "Ancho del sépalo", col= "plum")
+
+#6.10
+?abline
+plot(iris$Sepal.Length, iris$Sepal.Width, main = "Iris: Relación largo/ancho del sépalo",
+     xlab = "Largo del sépalo", ylab = "Ancho del sépalo", col= "plum",
+     abline( h= 3, v=5, col="skyblue"))
+
+#6.11
+?par
+plot(iris$Sepal.Length, iris$Sepal.Width, main = "Iris: Relación largo/ancho del sépalo", 
+     xlab = "Largo del sépalo", ylab = "Ancho del sépalo", col = "orange",
+     abline( h= 3, v=5, lty= 2, lwd=4, col="olivedrab1"))
+
+#### HISTOGRAMA ####
+?hist
+hist(Solar.R)
+hist(Solar.R, freq = FALSE)
+hist(Solar.R, freq = FALSE, breaks = 20)
+
